@@ -31,7 +31,7 @@ class Inicio{
         };
 
         $.ajax(settings).done(function (response) {
-            //console.log(response);
+            console.log(response);
             var res = JSON.parse(response);
             if(res.ok){
                 localStorage.setItem("token",res.payload);
@@ -73,7 +73,7 @@ class Inicio{
 
         load.abrir();
         $.ajax(settings).done(function (response) {
-            //console.log(response);
+            console.log(response);
             var res = JSON.parse(response);
             if(res.ok){
                 localStorage.setItem("telefone",telefone);
