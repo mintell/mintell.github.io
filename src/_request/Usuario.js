@@ -3,7 +3,7 @@ class Usuario {
 
     constructor(jquery, loader, notificacao) {
         this.jquery = jquery;
-        this.apiUrl = "https://api.mintel.ao";
+        this.apiUrl = "https://website-3634ff61.bsc.jwz.mybluehost.me/API";
         this.loader = loader;
         this.notificacao = notificacao;
     }
