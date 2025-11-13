@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../dist/css/style.css">
+        <link rel="stylesheet" href="../../dist/css/sms.css">
+
+        <script src="../js/jquery.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap"
+            rel="stylesheet">
+
+        <script src="../js/jquery.js"></script>
+        <script src="../../components/loader/loader.js"></script>
+        <script src="../../components/notificacao/notificacao.js"></script>
+        <script src="../_request/Sms.js"></script>
+
+        <title>Mensagens agendadas</title>
+
+        <style>
+        .request-btn a {
+            color: #fff;
+            font-size: .9rem;
+            text-transform: capitalize;
+            text-decoration: none;
+            
+        }
+        .request-btn span {
+            margin: 0 12px;
+        }
+
+        .span.sms-section-btn {
+            background-color: #000;
+        }
+
+        span.sms-section-btn a {
+            color: #fff;
+            text-align: center;
+        } 
+
+    </style>
+
+    </head>
+    <body  class="container-menu">
+       
+        <main class="main close-content">
+            <br><br>
+            <div class="sms-section">
+                            <a href="sms.html"><img src="../icon/back.svg" alt="" style="display: block;width: 30px;float: left;"></a>
+            </div>
+
+
+            <p class="total-sms"></p>
+                <div style="width:100%;max-height:60vh;overflow-y:auto;" class="render">
+                        
+                </div>
+        </main>
+
+    </body>
+    <script src="./../js/menu.js"></script>
+    <script src="./../../components/slideImg/lightSlider.js"></script>
+    <script src="./../../components/slideImg/slideImg.js"></script>
+    <script>
+        men();
+        pub();
+        bg();
+        var token = localStorage.getItem("token");
+
+        if(!token){ 
+            location.href = "../../index.html";
+        }else{
+            
+        }
+
+        var notificacao = new debliwuinotificacao();
+        var loader = new debliwuiloader();
+        document.querySelector("body").append(notificacao);
+        document.querySelector("body").append(loader);
+        var RequestSms = new Sms($, loader, notificacao);
+
+        RequestSms.todosProgramadas();
+
+</script>
+</html>

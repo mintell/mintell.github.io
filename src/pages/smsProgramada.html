@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./../../dist/css/style.css">
+        <link rel="stylesheet" href="./../../dist/css/sms.css">
+
+        <link rel="stylesheet" href="./../../dist/css/modal.css">
+        <link rel="stylesheet" href="./../../dist/css/clientes.css">
+        <link rel="stylesheet" href="./../../dist/css/send_sms.css">
+
+        <script src="./../js/jquery.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap"
+            rel="stylesheet">
+            
+        <script src="../js/jquery.js"></script>
+        <script src="../../components/loader/loader.js"></script>
+        <script src="../../components/notificacao/notificacao.js"></script>
+        <script src="../_request/Sms.js"></script>
+        <title class="sms-name">Mensagem Programada</title>
+
+        <style> 
+        picture {
+            display: flex;
+            justify-content: flex-end;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .modal {
+            width: 88%;
+            height: 553px;
+        }
+        #sms-edit-list {
+            background-color: #000;
+            color: #fff;
+            font-size: 1rem;
+        }
+    </style>
+
+    </head>
+    <body class="container-menu">
+
+        <main class="main close-content">
+            <section class="sms-section">
+                <a href="agendadas.html"><img src="../icon/back.svg" alt="" style="display: block;width: 30px;float: left;"></a>
+                
+                <button class="sms-section-btn modal-send" id="sms-target">
+                    DESTINATÁRIO
+                </button> 
+                    
+                    <!-- agendar button -->
+                    <button class="agendar-btn modal-agendar">ALTERAR</button>
+                
+            </section>
+                <p style="font-weight:bold;color:#00000040;font-size:18px;" class="sms-remetentes"><span class="lista-remetente">0 </span> Listas e <span class="contacto-remetente">0</span> Contactos </p>
+                <p style="font-weight:light;color:#00000040;font-size:15px;"><span class="sms-enviadas"></span> mensagens no total </p>
+                <br>
+                
+            
+
+            <!-- agendar modal -->
+            <div id="myModal-agendar" class="modal"
+                style="width: 80%; height: 260px; border-radius: 5px; top: 280px;">
+                <div class="modal-content">
+
+                    <div class="modal-box-content client-modal">
+
+                        <section class="modal-box-section">
+                            <form class="agendar-form" id="agendar">
+
+                                <label for="date"
+                                    class="label-date">DATA</label>
+
+                                <section class="section-agendar">
+                                    <input type="date" id="date"
+                                        class="agendar-date" required>
+                                        <label for="date">
+                                    <img src="../../assets/calendar.svg"
+                                        alt="date icon"></label>
+
+                                </section>
+
+                                <label for="hour">HORA</label>
+
+                                <section class="section-agendar">
+                                    <input type="time" id="hour"
+                                        class="agendar-hour" required>
+                                    <label for="hour"><img src="../../assets/clock.svg"
+                                        alt="hour icon"></label>
+                                </section>
+
+                                <div class="button-agendar">
+                                    <button type="button"
+                                        class="agendar-yes" onclick="RequestSms.alterarProgramado()">ALTERAR</button>
+                                    <div class="close-agendar">NÃO</button>
+                                </div>
+
+                            </form>
+
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="myOverlay-agendar" class="overlay"></div>
+            <!-- -->
+             <div class="sms__box">
+
+                <select name="select" id="remetentes" style="border-radius: 3px;background: #D9D9D9;box-shadow: 1px 1px 1px black;font-weight: bold;font-size: 17px;">
+                
+                </select>
+            </div>
+             <div class="sms__box"><br>
+                <p id="quando" style="font-weight: bold;opacity: .7;"></p>
+            </div>
+            <textarea name="text" class="sms-textarea" id="sms-box" cols="30"
+                rows="10" style="color: #000;font-size: 23px;"
+                ></textarea>
+
+            <!-- first modal -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <picture>
+                        <img src="../img/circle-check-solid-red.png" alt
+                            id="icon-confirmed" class="close" style="width: 30px;height: 30px;">
+
+                    </picture>
+
+                    <div class="modal-box-content client-modal">
+                             <br>
+                        <h3 class="ativa-smslist" style="padding: 10px;box-shadow: 1px 1px 1px black;background-color: #ffff00;"> <span id="qtd_listas"></span> LISTAS DE ENVIO</h3>
+                        <input type="hidden" id="store-listas" value="[]">
+                        <section class="modal-box-section sms-list" style="overflow-y: auto;max-height:55vh;justify-content: normal;margin-bottom: 20px;display: none;">
+                
+                        </section>
+                        
+                        <h3 style="margin-top:15px;padding: 10px;box-shadow: 1px 1px 1px black;background-color: #ffff00;" class="ativa-contactos"> <span id="qtd_contactos"></span> CONTACTOS</h3>
+                        <input type="hidden" id="store-contactos" value="[]">
+                        <section class="modal-box-section contactos" style="overflow-y: auto;max-height:55vh;justify-content: normal;display: none;">   
+
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="myOverlay" class="overlay"></div>
+            
+
+        <section class="sms-section">
+            <!-- apagar button -->
+            <button class="apagar-btn modal-apagar">APAGAR</button>
+
+            <!-- apagar modal -->
+            <div id="myModal-apagar" class="modal"
+                style="width: 80%; height: 260px; border-radius: 5px; top: 280px;">
+                <div class="modal-content">
+
+                    <div class="modal-box-content client-modal">
+
+                        <section class="modal-box-section">
+                            <form class="apagar-form" id="apagar">
+
+                                <label for="date"
+                                    class="label-date pergunta-modal">APAGAR ?</label>
+                                <div class="button-apagar">
+                                    <div class="apagar-yes btn-modal" style="text-align: center;background-color: #ff0000;" onclick="RequestSms.apagarProgramada()">SIM</div>
+                                    <div class="close-apagar btn-modal" style="text-align: center;background-color: #00ff00;">NÃO</div>
+                                </div>
+
+                            </form>
+
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="myOverlay-apagar" class="overlay"></div>
+            <!-- -->
+
+                
+
+            <!-- reenviar button -->
+            <button class="reenviar-btn modal-reenviar">ENVIAR AGORA</button>
+
+            <!-- reenviar modal -->
+            <div id="myModal-reenviar" class="modal"
+                style="width: 80%; height: 260px; border-radius: 5px; top: 280px;">
+                <div class="modal-content">
+
+                    <div class="modal-box-content reenviar-modal">
+
+                        <section class="modal-box-section">
+                            <form class="reenviar-form" id="reenviar">
+
+                                <label for="date"
+                                    class="label-date pergunta-modal">ENVIAR ?</label>
+                                <div class="button-reenviar">
+                                    <div class="reenviar-yes btn-modal" style="text-align: center;background-color: #ffff00;" onclick="RequestSms.enviarAgora()">SIM</div>
+                                    <div class="close-reenviar btn-modal" style="text-align: center;background-color: #00ff00;">NÃO</div>
+                                </div>
+
+                            </form>
+
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="myOverlay-reenviar" class="overlay"></div>
+            <!-- -->
+        </section>
+        </main>
+    </body>
+    <script src="./../js/menu.js"></script>
+    <script src="./../js/cliente.js"></script>
+    <script src="../js/agendarModal.js"></script>
+    <script src="../js/apagarModal.js"></script>
+    <script src="../js/reenviarModal.js"></script>
+        <script>
+            men();
+    banner("mensagem programada");
+    bg();
+        var token = localStorage.getItem("token");
+
+        if(!token){ 
+            location.href = "../../index.html";
+        }else{
+            
+        }
+
+        var notificacao = new debliwuinotificacao();
+        var loader = new debliwuiloader();
+        document.querySelector("body").append(notificacao);
+        document.querySelector("body").append(loader);
+        var RequestSms = new Sms($, loader, notificacao);
+
+        var chave = (location.search).split("=")[1];
+        var SmsVer = RequestSms.verProgramada(chave);
+
+
+
+        var remetentes = JSON.parse(localStorage.getItem("remetentes"));
+        var remetentesHtml = "";
+        (remetentes).forEach(element => {
+            remetentesHtml += `<option value="${(element.name)}">${(element.name)}</option>`;
+        });        
+        document.querySelector("#remetentes").innerHTML = remetentesHtml;    
+        
+        $(".ativa-smslist").click(function(){
+            
+            if($(".sms-list")[0].style.display == "none"){
+                $(".sms-list")[0].style.display = "flex";
+            }
+            else if($(".sms-list")[0].style.display == "flex"){
+                $(".sms-list")[0].style.display = "none";
+            }
+        });
+
+        $(".ativa-contactos").click(function(){
+            
+            if($(".contactos")[0].style.display == "none"){
+                $(".contactos")[0].style.display = "flex";
+            }
+            else if($(".contactos")[0].style.display == "flex"){
+                $(".contactos")[0].style.display = "none";
+            }
+        });
+
+      
+</script>
+
+</html>

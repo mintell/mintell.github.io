@@ -1,9 +1,10 @@
 .sms-section {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-top: 0px;
   margin-bottom: 35px;
+  align-content: center;
+  justify-content: space-between !important;
+  align-items: center;
 }
 
 #sms-create-list {
@@ -12,13 +13,14 @@
 
 .sms-section-btn {
   width: 112px;
-  height: 29px;
-  line-height: 29px;
-  display: inline-block;
-  box-shadow: 1px 1px 1px black;
-  border-radius: 5px;
-  font-size: 12px;
-  cursor: pointer;
+    height: 29px;
+    line-height: 29px;
+    display: inline-block;
+    box-shadow: 1px 1px 1px gray;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #d9d9d9;
 }
 
 .sms-section-btn a {
@@ -44,5 +46,6 @@
   border-radius: 5px;
   font-size: 12px;
   cursor: pointer;
-  margin-bottom: 20px;
+  background-color:#ffff00;
+  /* margin-bottom: 20px; */
 }/*# sourceMappingURL=sms.css.map */

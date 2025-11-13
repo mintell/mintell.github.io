@@ -1,0 +1,32 @@
+ /* width */
+    ::-webkit-scrollbar {
+    width: 1px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+    background: #dc3545; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    }
+    @font-face {
+        font-family: fonte;
+        src: url(font.ttf);
+    }
+    .corpo{width: 320px;display: block;margin:0 auto;padding: 2%;font-family: "fonte" ;height: 98vh;position: relative;box-shadow: 0px 0px 7.4px 1px rgba(255, 0, 0, 0.28);margin-top: 1vh;overflow-y: auto;}
+    .botao{position:fixed;bottom:1vh;border-radius: 0;left:3%;width: 94%;font-weight: bold;}
+    .botaocard{width:100%;font-family: bold;border-radius: 0;text-align: left;margin: 5px 0;}
+
+    input {border-radius: 0 !important}
+    h3{text-align: center;}
+    @media screen and (max-width:400px) {
+        .corpo{width: 98%;}
+    }

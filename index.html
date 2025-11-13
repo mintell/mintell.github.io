@@ -1,194 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./dist/css/style.css">
-    <script src="src/js/jquery.js"></script>
-    
-    <title>MINTEL</title>
-</head>
-<body>
-   <div class="mintel">
-    <h1>MINTEL</h1>
-   </div>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./dist/css/style.css">
 
-    <main>
-        <div class="logo">
-            <img src="./src/img/lologlog 1.png" alt="">
-        </div>
+        <link rel="stylesheet" href="./dist/css/modal.css">
+        <script src="src/js/jquery.js"></script>
+        <script src="components/loader/loader.js"></script>
+        <script src="components/notificacao/notificacao.js"></script>
+        <script src="src/_request/Inicio.js"></script>
+        <script src="sw.js"></script>
+        <link rel="manifest" href="manifest.json">
 
-        <form action="#" id="form">
+        <title>MINTEL</title>
+    </head>
+    <body style="background-image:url('./src/img/back.jpg')">
 
-            <input type="phone" class="phone" name="telefone" id="telefone" placeholder="Telefone" required>
-            
-            <div class="form-field__password">
-                <input type="password" class="password" name="password" id="palavra_passe" placeholder="Password" required>
-                
-                <!-- <div class="show">SHOW</div> -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="open-eye" 
-                width="25" height="24" viewBox="0 0 576 512"
-                aria-labelledby="eyeIcon" role="img">
-                <title id="eyeIcon">SHOW</title><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
-                <path 
-                fill="#b2a746"
-                fill-rule="evenodd"
-                d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
-                </svg> 
+        <main>
+            <div
+                style="position: fixed;top: 0;left: 0;width: 100%;height:100vh;z-index: -1;">
+                <img src="./src/img/back.jpg" style="width: 100%;height: 100%;">
+            </div>
+            <img src="./src/img/bell.webp"
+                class="reenviar-btn modal-reenviar fade"
+                style="position: absolute;top: 35px;left: 35px;width: 12.5%;">
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" class="close-eye"
-                area-labelledby="eyeIconClose" role="img"
-                viewBox="0 0 640 512">
-                <title id="eyeIconClose">HIDE</title>
-                <!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
-                <path
-                fill="#b2a746"
-                fill-rule="evenodd"
-                d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"/>
-                </svg>
-
+            <div class="logo">
+                <img src="./src/img/LOGO.png" style="width:200PX;">
             </div>
 
-            <div class="form-login">
+            <form action="#" id="form">
 
-                <button type="submit" id="login__btn" >ENTRAR</button>
-                <a href="./src/pages/codigo-recuperacao.html" id="login__link">Esqueci a senha</a>
-            
+                <input type="phone" class="phone" name="telefone"
+                    id="entrar-telefone"
+                    placeholder="Telefone" required>
+
+                <div class="form-field__password">
+                    <input type="password" class="password" name="password"
+                        id="entrar-passe" placeholder="Password" required>
+
+                    <!-- <div class="show">SHOW</div> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="open-eye"
+                        width="25" height="24" viewBox="0 0 576 512"
+                        aria-labelledby="eyeIcon" role="img">
+                        <title
+                            id="eyeIcon">SHOW</title><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            fill="#b2a746"
+                            fill-rule="evenodd"
+                            d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
+                    </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25"
+                        height="24" class="close-eye"
+                        area-labelledby="eyeIconClose" role="img"
+                        viewBox="0 0 640 512">
+                        <title id="eyeIconClose">HIDE</title>
+                        <!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            fill="#b2a746"
+                            fill-rule="evenodd"
+                            d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z" />
+                    </svg>
+
+                </div>
+
+                <div class="form-login">
+
+                    <button type="submit" id="login__btn">ENTRAR</button>
+                    <a href="./src/pages/codigo-recuperacao.html"
+                        id="login__link">Esqueci a senha</a>
+
+                </div>
+
+                <br><br><br>
+                <style>
+                    .canais{width: 78%;display: flex;justify-content: space-between;align-items: center;margin: 30px auto;padding: 10px;box-shadow: 0px 0px 0px 5px #ffffff40;}
+                    .canais a{width: 12.5%;}
+                    .canais img{width: 100%;}
+                </style>
+                <div class="canais">
+
+                    <a href="tel:922102841" target="_blank"><img
+                            src="./src/img/call.png"></a>
+                    <a
+                        href="https://api.whatsapp.com/send?phone=+244922102841"
+                        target="_blank"><img
+                            src="./src/img/wa.png"></a>
+                    <a
+                        href="https://facebook.com/profile.php?id=61555696424981"
+                        target="_blank"><img
+                            src="./src/img/fb.png"></a>
+                    <a
+                        href="https://www.instagram.com/mintel.marketer/"
+                        target="_blank"><img
+                            src="./src/img/ig.png"></a>
+                    <a
+                        href="https://www.youtube.com/channel/UC51yKt_7iiPVbT0GYT-pokQ"
+                        target="_blank"><img
+                            src="./src/img/yt.png"></a>
+                </div>
+
+            </form>
+
+            <!-- reenviar modal -->
+            <div id="myModal-reenviar" class="modal"
+                style="width: 80%; height: 260px; border-radius: 5px; top: 280px;">
+                <div class="modal-content">
+
+                    <div class="modal-box-content reenviar-modal">
+
+                        <section class="modal-box-section">
+                            <form class="reenviar-form" id="reenviar">
+
+                                <div class="canais"
+                                    style="width: 90%;box-shadow: 0px 0px 0px 5px #00000040;">
+                                    <a href="tel:922102841" target="_blank"><img
+                                            src="./src/img/call.png"></a>
+                                    <a
+                                        href="https://api.whatsapp.com/send?phone=+244922102841"
+                                        target="_blank"><img
+                                            src="./src/img/wa.png"></a>
+                                    <a
+                                        href="https://facebook.com/profile.php?id=61555696424981"
+                                        target="_blank"><img
+                                            src="./src/img/fb.png"></a>
+                                    <a
+                                        href="https://www.instagram.com/mintel.marketer/"
+                                        target="_blank"><img
+                                            src="./src/img/ig.png"></a>
+                                    <a
+                                        href="https://www.youtube.com/channel/UC51yKt_7iiPVbT0GYT-pokQ"
+                                        target="_blank"><img
+                                            src="./src/img/yt.png"></a>
+                                </div>
+
+                                <label for="date"
+                                    class="label-date pergunta-modal"
+                                    style="text-align: center;">Pode tirar
+                                    dúvidas por chamada telefonica</label>
+                                <a href="tel:922102841"
+                                    style="display:block;width: 90%;box-shadow: 0px 0px 0px 5px #00000040;margin: 30px auto;padding: 10px;text-align: center;">FALAR
+                                    COM OPERADOR</a>
+                            </form>
+
+                        </section>
+
+                    </div>
+                </div>
             </div>
 
-          
-        </form>
+            <div id="myOverlay-reenviar" class="overlay"></div>
+            <!-- -->
+        </main>
 
-        <!-- CONSUMINDO A API -->
-        <script>
+    </body>
+    <script src="./src/js/reenviarModal.js"></script>
+    <script>
 
-            // localStorage.setItem("token", "rGufgHvxZi2JEWUQF2ys9sKjGe7f0FT5jDPzJoUQywnSdkhGoT1EpTVtqNLJZfXJSYHowOlKhdTMM7Vv\/e4wzhSvFx7+GKooAXkS6hfQAdfW+WKH3qRNjvx0tAkShI+DP4Pic5zHvoZ7x1i0ju5gAOb01baIZ5\/Lpx8IbmR0Hr\/LAipD8Jqp+pJXzMj6lAcPnKSdeGh3\/rQ\/6q7axDo2US97dxdu9dxHfcOOxXxEemq024\/VusfNoujC\/SZW\/5oQmh6H4+rsXDH42EucnVd\/g5ndN\/beccK0hZIps67KJ4jiBa8X6b+lFljWRC16FwVZ5oYHtlZuypRb13CKT+XCqaX6ICEqsIpK7999YDde0Ud3bSPc6kzvFdkYymlSB68P7N2az0Tnm01z\/Cao4qKtpwrrKxC6HaUu315i75BEZCq7X7k7ueTOBvpXu97lqw3sW5GGGT2foaN87kL6LCR+leP15DdDEAfH2+U\/8dkOc8P8wEzbn5Av4M+UUi15ZWSJlkBp4\/qYKObSjBPz2p+bp52gAp1fQyxBnZMHfC4oiu3xpT+b8EBOUNMvQa0vs2ZuNTXJcym1hcV3koWa3735azenrlq5993AFlwlNSglo97wbPe44+\/BBekiy\/ltMJTwDNdOaQiGyxkCtc0jJlXLfwUAqOBgItOg4avptqZma81Ce5iE5jkJ8JR\/d4QCsY6ACfA4SK\/NTXiWte3edC4KYzU0GmNkP1ql1hJabh92q+9uzcDte+HQs6wK38VkEFogr1hcqJaDHDEa6kQ0ha6OhykHqsqMKZ1S\/FnXYJ8d7mmDCes5A+e1IqvhnhHCmtD7157vH6B6NAU4+LE+QRoIygwSmHiZZbAD\/6gWoiN5Wpogw2kHFri7wA2jhXBe0ThaZEHwuKQXlKbhzW+tyarUe4Gu20W2L3T7G68R4eGj0eIwVYqQkfjwpfLvoIlJj5rd3HpJNrV4ReQYYxEEK7yn40Gh4kq3vbk1WjEhcHe\/exRlcUqEORu6b\/YiptbEYhMdhDU2VVGdtKyNVmRLSlLsrw3x5JpuimSmew3tJE1c2WyxcavJU9AWqeXRsYSi.NjY1MjQ2MzI1MzdhNDU1NDc5Nzc3MTc5Njg1NTQ2NmYzODMwNjQzODMyNzU0NjU4NmM0NTRlMzU1MjY2NTU3NTZkNjc1NzMwMzk2NDQzNGU=")
+       
 
+        var notificacao = new debliwuinotificacao();
+        var loader = new debliwuiloader();
+        document.querySelector("body").append(notificacao);
+        document.querySelector("body").append(loader);
+        var RequestInicio = new Inicio($, loader, notificacao);
 
-            document.getElementById('form').addEventListener('submit', function (event) {
-                
-                event.preventDefault();
+        document.getElementById('form').addEventListener('submit', function (event) {                        
+            event.preventDefault();
 
-                // Obter os valores do formulário
-                var telefone = document.getElementById('telefone').value;
-                var palavra_passe = document.getElementById('palavra_passe').value;
+            RequestInicio.entrar();
 
-                // Enviar as credenciais para a API (assumindo que a API retorna um token de autenticação)
-                authenticateUser(telefone, palavra_passe);
-            });
+        });
+        setInterval(function(){
+            $(".fade").fadeOut();$(".fade").fadeIn();
+        },3000);
 
+        var token = localStorage.getItem("token");
 
-            function authenticateUser(telefone, palavra_passe) {
-                // Substitua a URL com a sua API de autenticação
-                var apiUrl = 'https://api.mintel.ao/entrar';
+        if(token.length > 0){ 
+            location.href = "src/pages/home.html";
+        }else{
+            
+        }
 
-                // Configuração da requisição
-                var requestOptions = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ telefone: telefone, palavra_passe: palavra_passe }),
-                };
+        if ('serviceWorker' in window.navigator) {
+            window.addEventListener('load', () => {
 
-                // Fazendo a requisição à API
-                fetch(apiUrl, requestOptions)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Verificando se a autenticação foi bem-sucedida
-                        if (data.token) {
-                            // Armazenar o token, redirecionar ou realizar outras ações
-                            console.log('Autenticação bem-sucedida. Token:', data.token);
-                        } else {
-                            console.log('Falha na autenticação. Mensagem:', data.message);
-                        }
+                window.navigator.serviceWorker.register('sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registration completed with scope: ', registration.scope);
+
+                    }, (err) => {
+                        console.log('Service Worker registration failed', err);
                     })
-                    .catch(error => console.error('Erro na requisição:', error));
-            }
-            
+            })
+        } else {
+            console.log('Service Workers not supported');
+        }
 
-
-            // $(document).ready(function(){
-
-            //     $('#form').submit(function(value){
-            //         value.preventDefault()
-
-
-            //         var dados = $(this).serializeArray();
-
-            //         telefone = dados[0].value
-            //         palavra_passe = dados[1].value
-                            
-                   
-            //         var url = 'https://api.mintel.ao/entrar';
-                    
-            //         // Configuração da solicitação AJAX
-            //         $.ajax({
-            //             url: url,
-            //             type: 'GET',
-            //             success: function(data) {
-
-                        
-            //                 // Manipule a resposta aqui
-            //             // Dados fornecido
-            //                 // Se data é uma string, você precisa analisá-la para obter um objeto
-            //                 if (typeof data === 'string') {
-            //                     try {
-            //                         data = JSON.parse(data);
-            //                     }   
-                                
-            //                     catch (error) {
-            //                     console.error('Erro ao analisar os dados JSON:', error);
-            //                     // Lide com o erro conforme necessário
-            //                     }
-            //                 }
-                        
-            //                 for(let i = 0; i <= data["payload"].length-1; i++){
-                            
-
-            //                     if(data["payload"][i].telefone == telefone){
-
-            //                         if (data["payload"][i].palavra_passe == palavra_passe){
-
-            //                             let identifier = data["payload"][i].identificador
-                                    
-            //                             // Crie o link com o identificador
-            //                             var link = 'http://127.0.0.1:5500/src/pages/home.html?user=' + identifier;
-                                        
-            //                             // Redirecione o usuário para o link
-            //                             window.location.href = link;
-            //                         }
-                                    
-                                        
-            //                     }
-            //                 }
-                        
-            //             },
-                    
-            //             error: function(error) {
-            //                 // Manipule erros aqui
-            //                 console.error('Erro na solicitação:', error);
-            //                 }
-            //             });
-                    
-            //     })
-
-            // })
-           
-            
-           
-           
-           
-           
-           </script>
-
-
-        
-    </main>
-    
-</body>
-
-<script src="./src/js/password_login.js"></script>
+       
+</script>
 </html>

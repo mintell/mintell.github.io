@@ -5,8 +5,9 @@
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  border: 1px solid #e0e0e0;
+  /* border: 1px solid #e0e0e0; */
   margin-top: 16px;
+  box-shadow: 0 0 4px 2px #00000060;
 }
 
 .sms-textarea::placeholder {
@@ -20,9 +21,9 @@
 
 .modal-box-content h3 {
   display: block;
-  width: 75%;
+  width: 98%;
   background-color: #fff385;
-  padding: 5px 0;
+  padding: 1%;
   margin: 10px auto 5px auto;
 }
 
@@ -34,7 +35,7 @@
 .request-btn a {
   color: #fff;
   font-family: "Inter", sans-serif;
-  font-size: 0.875rem;
+  font-size: 1rem;
   text-transform: capitalize;
 }
 
@@ -44,13 +45,47 @@
   cursor: pointer;
   height: 29px;
   line-height: 29px;
-  margin-bottom: 10px;
+  /* margin-bottom: 5px; */
   border-radius: 3px;
   background-color: #d9d9d9;
   box-shadow: 1px 1px 1px gray;
 }
 
 button.agendar-btn:hover {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 1px 1px 1px black;
+}
+.apagar-btn {
+  display: block;
+  min-width: 112px;
+  cursor: pointer;
+  height: 29px;
+  line-height: 29px;
+  /* margin-bottom: 10px; */
+  border-radius: 3px;
+  background-color: #FF0000;
+  box-shadow: 1px 1px 1px gray;
+}
+
+.reenviar-btn {
+  display: block;
+  min-width: 112px;
+  cursor: pointer;
+  height: 29px;
+  line-height: 29px;
+  /* margin-bottom: 10px; */
+  border-radius: 3px;
+  background-color: #FFFF00;
+  box-shadow: 1px 1px 1px gray;
+}
+
+button.apagar-btn:hover {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 1px 1px 1px black;
+}
+button.reenviar-btn:hover {
   background-color: #000;
   color: #fff;
   box-shadow: 1px 1px 1px black;
@@ -63,3 +98,22 @@ button.agendar-btn:hover {
   cursor: pointer;
   text-align: center;
 }/*# sourceMappingURL=send_sms.css.map */
+
+
+.btn-modal{
+  width:100px;
+  padding: 10px;
+  border-radius: 5px;
+  display:block;
+  margin:20px auto;
+  
+}
+.btn-modal:hover {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 1px 1px 1px black;
+}
+
+.pergunta-modal{
+  opacity:0;
+}

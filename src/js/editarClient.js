@@ -9,7 +9,7 @@ const myPopupText = document.querySelector('.popup p')
 
 editarEbookBtn.addEventListener('click',function(){
     this.classList.toggle('active');
-   
+   editarEbookBtn.style.display = "none";
 
     if(editarEbookBtn.className.match("active")){
     

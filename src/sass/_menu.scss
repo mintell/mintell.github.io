@@ -11,7 +11,9 @@
     background-color: #0000;
     display: grid;
     grid-template-columns: 1fr 1fr; /* 3 colunas com largura igual */
-    grid-gap:1px; /* espaco de 10px entre as celulas */
+    grid-gap:0; /* espaco de 10px entre as celulas */
+    width: 100%;
+    height: 100vh;
   
 }
   /* Estilizando as celulas da grade */
@@ -98,8 +100,8 @@
 
 .menu__nav-div {
   background-color: #fff;
-  width: 80%; //responsive based on size of screen
-  margin: 30px auto;
+  width: 100%; //responsive based on size of screen
+  margin: 0 auto;
   border: none;
 }
 
