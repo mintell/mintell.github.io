@@ -40,6 +40,7 @@ class Home {
         };
 
         $.ajax(settings).done(function (response) {
+            console.log(response);
             var res = JSON.parse(response);
             localStorage.setItem("nome", (res.payload).nome);
             localStorage.setItem("genero", (res.payload).genero);
