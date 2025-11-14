@@ -26,6 +26,7 @@ class Home {
         }, 700)
 
         var token = localStorage.getItem("token");
+        console.info(token);
         var url = this.apiUrl;
         var settings = {
             "url": this.apiUrl + "/usuario/dados",
