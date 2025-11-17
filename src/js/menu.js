@@ -1,6 +1,6 @@
 
 function pub() {
-    var pub = JSON.parse(localStorage.getItem("pub"));
+    var pub = ["images/1.svg","images/2.svg","images/3.svg"];
     var slide = new debliwuislideimg($, pub, mostrarquantos = 1, pager = false, speed = 1000, pause = 3000);
     document.querySelector(".main").prepend(slide);
 }
